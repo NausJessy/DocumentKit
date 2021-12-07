@@ -9,6 +9,9 @@ public class CommandManager {
     /// The list of futur commands.
     private var futureCommands: [Command] = []
 
+    /// Create a new instance.
+    public init() {}
+
     /// Execute the passed in command.
     public func execute(_ command: Command) {
         command.execute()
