@@ -19,4 +19,9 @@ class CompositeCommand: Command {
     func undo() {
         children.forEach { $0.undo() }
     }
+
+    /// The number of child commands.
+    var count: Int {
+        children.count
+    }
 }

@@ -4,10 +4,10 @@ import Foundation
 public class CommandManager {
 
     /// The list of past commands.
-    private var passedCommands: [Command] = []
+    var passedCommands: [Command] = []
 
     /// The list of futur commands.
-    private var futureCommands: [Command] = []
+    var futureCommands: [Command] = []
 
     /// Create a new instance.
     public init() {}
