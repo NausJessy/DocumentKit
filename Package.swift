@@ -10,6 +10,9 @@ let package = Package(
         .library(
             name: "CommandKit",
             targets: ["CommandKit"]),
+        .library(
+            name: "DocumentKit",
+            targets: ["DocumentKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,5 +27,11 @@ let package = Package(
         .testTarget(
             name: "CommandKitTests",
             dependencies: ["CommandKit"]),
+        .target(
+            name: "DocumentKit",
+            dependencies: ["CommandKit"]),
+        .testTarget(
+            name: "DocumentKitTests",
+            dependencies: ["DocumentKit"]),
     ]
 )
