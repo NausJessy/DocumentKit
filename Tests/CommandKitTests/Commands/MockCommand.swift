@@ -6,7 +6,7 @@ class MockCommand: Command {
 
     init() {}
 
-    func execute() {
+    func execute() throws {
         didExecute = true
         didUndo = false
     }

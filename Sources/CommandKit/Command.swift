@@ -2,7 +2,7 @@
 public protocol Command {
 
     /// Execute the command.
-    func execute()
+    func execute() throws
 
     /// Revert the work performed by the command.
     func undo()

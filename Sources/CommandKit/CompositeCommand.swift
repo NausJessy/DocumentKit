@@ -12,8 +12,10 @@ public class CompositeCommand: Command {
         children.append(child)
     }
 
-    public func execute() {
-        children.forEach { $0.execute() }
+    public func execute() throws {
+        try children.forEach { command in
+            try command.execute()
+        }
     }
 
     public func undo() {

@@ -17,7 +17,7 @@ final class CompositeCommandTests: XCTestCase {
         XCTAssertEqual(compositeCommand.count, 1)
     }
 
-    func testExecute() {
+    func testExecute() throws {
         // Given
         let command = MockCommand()
         
@@ -25,21 +25,21 @@ final class CompositeCommandTests: XCTestCase {
         let composite = CompositeCommand()
         composite.add(command)
 
-        composite.execute()
+        try composite.execute()
 
         // Then
         XCTAssertTrue(command.didExecute)
         XCTAssertFalse(command.didUndo)
     }
 
-    func testUndo() {
+    func testUndo() throws {
         // Given
         let command = MockCommand()
 
         // When
         let composite = CompositeCommand()
         composite.add(command)
-        composite.execute()
+        try composite.execute()
         composite.undo()
 
         // Then

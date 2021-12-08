@@ -75,4 +75,18 @@ final class CommandManagerTests: XCTestCase {
         XCTAssertEqual(commandManager.passedCommands.count, 2)
         XCTAssertEqual(commandManager.futureCommands.count, 0)
     }
+
+    func testThrowingCommandUndosCommand() {
+        // Given
+        let command = ThrowingCommand()
+
+        // When
+        commandManager.execute(command)
+
+        // Then
+        XCTAssertTrue(command.didUndo)
+
+        XCTAssertEqual(commandManager.passedCommands.count, 0)
+        XCTAssertEqual(commandManager.futureCommands.count, 0)
+    }
 }
