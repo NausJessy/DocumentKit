@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "CommandKit",
+    name: "DocumentKit",
     products: [
         .library(
             name: "CommandKit",
