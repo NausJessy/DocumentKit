@@ -13,7 +13,7 @@ final class DeleteTextTests: XCTestCase {
 
     // MARK: - Tests
 
-    func testExecuteAndUndo() {
+    func testExecuteAndUndo() throws {
         // Given
         let content = "Hello Beam!"
         document.content.text = content
@@ -26,7 +26,7 @@ final class DeleteTextTests: XCTestCase {
         )
 
         // When
-        deleteTextCommand.execute()
+        try deleteTextCommand.execute()
 
         // Then
         XCTAssertEqual(document.content.text, content.replacingOccurrences(of: " Beam", with: ""))
@@ -38,4 +38,22 @@ final class DeleteTextTests: XCTestCase {
         XCTAssertEqual(document.content.text, content)
     }
 
+    func testExecuteThrows() {
+        // Given
+        let content = "Hello Beam!"
+        document.content.text = content
+
+        // When
+        let range = content.range(of: " Beam")!
+
+        let deleteTextCommand = DeleteText(
+            content: document.content,
+            range: range
+        )
+        try? deleteTextCommand.execute()
+
+        // Then
+        XCTAssertThrowsError(try deleteTextCommand.execute())
+        XCTAssertEqual(document.content.text, content.replacingOccurrences(of: " Beam", with: ""))
+    }
 }

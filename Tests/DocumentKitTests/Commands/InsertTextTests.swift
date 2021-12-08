@@ -13,7 +13,7 @@ final class InsertTextTests: XCTestCase {
 
     // MARK: - Tests
 
-    func testExecuteAndUndo() {
+    func testExecuteAndUndo() throws {
         // Given
         let text = "Hello Beam!"
 
@@ -24,7 +24,7 @@ final class InsertTextTests: XCTestCase {
         )
 
         // When
-        insertTextCommand.execute()
+        try insertTextCommand.execute()
 
         // Then
         XCTAssertEqual(document.content.text, text)
@@ -36,4 +36,26 @@ final class InsertTextTests: XCTestCase {
         XCTAssertEqual(document.content.text, "")
     }
 
+    func testExecuteThrows() throws {
+        // Given
+        let text = "Hello Beam!"
+
+        let insertTextCommand1 = InsertText(
+            content: document.content,
+            index: document.content.text.startIndex,
+            text: text
+        )
+        try insertTextCommand1.execute()
+
+        let insertTextCommand2 = InsertText(
+            content: document.content,
+            index: document.content.text.endIndex,
+            text: text
+        )
+        insertTextCommand1.undo()
+
+        // Then
+        XCTAssertThrowsError(try insertTextCommand2.execute())
+        XCTAssertEqual(document.content.text, "")
+    }
 }

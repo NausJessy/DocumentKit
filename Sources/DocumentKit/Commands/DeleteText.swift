@@ -30,7 +30,10 @@ class DeleteText: Command {
 
     // MARK: - Command
 
-    func execute() {
+    func execute() throws {
+        guard content.text.startIndex <= range.lowerBound && range.upperBound < content.text.endIndex else {
+            throw CommandError.indexOutOfBounds
+        }
         content.text.removeSubrange(range)
     }
 

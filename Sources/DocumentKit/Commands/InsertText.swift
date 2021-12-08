@@ -35,7 +35,10 @@ class InsertText: Command {
 
     // MARK: - Command
 
-    func execute() {
+    func execute() throws {
+        guard content.text.startIndex <= index && index <= content.text.endIndex else {
+            throw CommandError.indexOutOfBounds
+        }
         content.text.insert(contentsOf: text, at: index)
     }
 
